@@ -54,6 +54,21 @@ class GuestRepository private constructor(context: Context) {
         }
     }
 
+    fun delete(id: Int): Boolean{
+        return try {
+            val db = mGuestDataBaseHelper.writableDatabase
+
+            val selection = DataBaseConstants.GUEST.COLUMNS.ID + " = ?"
+            val args = arrayOf(id.toString())
+
+            db.delete(DataBaseConstants.GUEST.TABLE_NAME, selection, args)
+
+            true
+        } catch (e: Exception){
+            false
+        }
+    }
+
     fun getAll(): List<GuestModel> {
         val list: MutableList<GuestModel> = ArrayList()
         return list
@@ -68,8 +83,4 @@ class GuestRepository private constructor(context: Context) {
         val list: MutableList<GuestModel> = ArrayList()
         return list
     }
-
-    fun delete(guest: GuestModel){
-    }
-
 }

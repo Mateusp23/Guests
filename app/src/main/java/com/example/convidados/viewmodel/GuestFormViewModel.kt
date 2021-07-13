@@ -18,7 +18,7 @@ class GuestFormViewModel(application: Application) : AndroidViewModel(applicatio
     val saveGuest: LiveData<Boolean> = mSaveGuest // LiveData o valor não pode ser modificado
 
     fun save (name: String, presence: Boolean) {
-        val guest = GuestModel(name, presence)
+        val guest = GuestModel(name = name, presence = presence)
         mGuestRepository.save(guest)
     }
 
