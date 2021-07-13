@@ -36,6 +36,24 @@ class GuestRepository private constructor(context: Context) {
         }
     }
 
+    fun update(guest: GuestModel): Boolean {
+        return try {
+            val db = mGuestDataBaseHelper.writableDatabase
+
+            val contentValues = ContentValues()
+            contentValues.put(DataBaseConstants.GUEST.COLUMNS.NAME, guest.name)
+            contentValues.put(DataBaseConstants.GUEST.COLUMNS.PRESENCE, guest.presence)
+
+            val selection = DataBaseConstants.GUEST.COLUMNS.ID + " = ?"
+            val args = arrayOf(guest.id.toString())
+
+            db.update(DataBaseConstants.GUEST.TABLE_NAME, contentValues, selection, args)
+            true
+        } catch (e: Exception){
+            false
+        }
+    }
+
     fun getAll(): List<GuestModel> {
         val list: MutableList<GuestModel> = ArrayList()
         return list
@@ -49,9 +67,6 @@ class GuestRepository private constructor(context: Context) {
     fun getAbsent(): List<GuestModel> {
         val list: MutableList<GuestModel> = ArrayList()
         return list
-    }
-
-    fun update(guest: GuestModel){
     }
 
     fun delete(guest: GuestModel){
