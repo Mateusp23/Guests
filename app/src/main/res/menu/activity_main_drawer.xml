@@ -15,6 +15,6 @@
         <item
             android:id="@+id/nav_absents"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_slideshow" />
+            android:title="@string/menu_absents" />
     </group>
 </menu>
