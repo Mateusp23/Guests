@@ -49,5 +49,4 @@ class GuestFormActivity : AppCompatActivity(), View.OnClickListener {
     private fun setListeners(){
         button_save.setOnClickListener(this)
     }
-
 }
