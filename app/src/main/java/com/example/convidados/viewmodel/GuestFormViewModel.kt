@@ -17,9 +17,22 @@ class GuestFormViewModel(application: Application) : AndroidViewModel(applicatio
     private var mSaveGuest = MutableLiveData<Boolean>() // MutableLiveData o valor pode ser modificado
     val saveGuest: LiveData<Boolean> = mSaveGuest // LiveData o valor não pode ser modificado
 
-    fun save (name: String, presence: Boolean) {
-        val guest = GuestModel(name = name, presence = presence)
-        mSaveGuest.value = mGuestRepository.save(guest)
+
+    private var mGuest = MutableLiveData<GuestModel>() // MutableLiveData o valor pode ser modificado
+    val guest: LiveData<GuestModel> = mGuest
+
+    fun save (id: Int, name: String, presence: Boolean) {
+        val guest = GuestModel(id, name, presence)
+
+        if(id == 0){
+            mSaveGuest.value = mGuestRepository.save(guest)
+        } else {
+            mSaveGuest.value = mGuestRepository.update(guest)
+        }
+    }
+
+    fun load(id: Int) {
+        mGuest.value = mGuestRepository.get(id)
     }
 
 }
